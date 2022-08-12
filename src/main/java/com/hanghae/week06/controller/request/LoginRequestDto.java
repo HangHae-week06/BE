@@ -11,10 +11,8 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class LoginRequestDto {
 
-  @NotBlank
-  private String userid;
+  private String loginId;
 
-  @NotBlank
   private String password;
 
 }

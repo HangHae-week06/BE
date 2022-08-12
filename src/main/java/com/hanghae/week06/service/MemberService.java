@@ -29,13 +29,13 @@ public class MemberService {
 
   @Transactional
   public ResponseDto<?> createMember(MemberRequestDto requestDto) {
-    if (null != isPresentMember(requestDto.getUserid())) {
-      return ResponseDto.fail("DUPLICATED_USERID",
+    if (null != isPresentMember(requestDto.getLoginId())) {
+      return ResponseDto.fail("DUPLICATED_MEMBER_ID",
           "중복된 아이디 입니다.");
     }
 
     Member member = Member.builder()
-            .userid( requestDto.getUserid())
+            .memberId( requestDto.getLoginId())
             .nickname(requestDto.getNickname())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                     .build();
@@ -44,7 +44,7 @@ public class MemberService {
     return ResponseDto.success(
         MemberResponseDto.builder()
             .id(member.getId())
-            .userid(member.getUserid())
+            .memberId(member.getMemberId())
             .nickname(member.getNickname())
             .createdAt(member.getCreatedAt())
             .modifiedAt(member.getModifiedAt())
@@ -54,14 +54,14 @@ public class MemberService {
 
   @Transactional
   public ResponseDto<?> login(LoginRequestDto requestDto, HttpServletResponse response) {
-    Member member = isPresentMember( requestDto.getUserid());
+    Member member = isPresentMember( requestDto.getLoginId() );
     if (null == member) {
       return ResponseDto.fail("MEMBER_NOT_FOUND",
           "사용자를 찾을 수 없습니다.");
     }
 
     if (!member.validatePassword(passwordEncoder, requestDto.getPassword())) {
-      return ResponseDto.fail("INVALID_MEMBER", "사용자를 찾을 수 없습니다.");
+      return ResponseDto.fail("INVALID_MEMBER", "비밀번호를 틀렸습니다.");
     }
 
     TokenDto tokenDto = tokenProvider.generateTokenDto(member);
@@ -70,7 +70,7 @@ public class MemberService {
     return ResponseDto.success(
         MemberResponseDto.builder()
             .id(member.getId())
-            .userid((member.getUserid()))
+            .memberId((member.getMemberId()))
             .nickname(member.getNickname())
             .createdAt(member.getCreatedAt())
             .modifiedAt(member.getModifiedAt())
@@ -93,8 +93,8 @@ public class MemberService {
   }
 
   @Transactional(readOnly = true)
-  public Member isPresentMember(String userid) {
-    Optional<Member> optionalMember = memberRepository.findByUserid(userid);
+  public Member isPresentMember(String memberId) {
+    Optional<Member> optionalMember = memberRepository.findByMemberId(memberId);
     return optionalMember.orElse(null);
   }
 

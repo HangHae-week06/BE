@@ -13,14 +13,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class MemberRequestDto {
 
+  private String loginId;
 
-  @NotBlank
-  private String userid;
-
-  @NotBlank
   private String nickname;
 
-  @NotBlank
   private String password;
 
 }
