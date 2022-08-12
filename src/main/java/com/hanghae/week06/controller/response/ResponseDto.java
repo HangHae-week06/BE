@@ -8,21 +8,14 @@ import lombok.Getter;
 public class ResponseDto<T> {
   private boolean ok;
   private T result;
-  private Error error;
 
   public static <T> ResponseDto<T> success(T data) {
-    return new ResponseDto<>(true, data, null);
+    return new ResponseDto<>(true, data );
   }
 
-  public static <T> ResponseDto<T> fail(String code, String message) {
-    return new ResponseDto<>(false, null, new Error(code, message));
+  public static <T> ResponseDto<T> fail(  T data  ) {
+    return new ResponseDto<>(false, data );
   }
 
-  @Getter
-  @AllArgsConstructor
-  static class Error {
-    private String code;
-    private String message;
-  }
 
 }
