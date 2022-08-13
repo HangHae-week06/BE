@@ -15,6 +15,7 @@ import com.hanghae.week06.repository.PostRepository;
 import com.hanghae.week06.service.validator.AuthValidator;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,43 +32,57 @@ public class PostService {
   private final AuthValidator authValidator;
 
   @Transactional
-  public ResponseDto<?> createPost(PostRequestDto requestDto, UserDetailsImpl userDetailsImpl) {
+  public ResponseEntity<?> createPost(PostRequestDto requestDto, UserDetailsImpl userDetailsImpl) {
+
+    if (userDetailsImpl == null) {
+      throw new IllegalArgumentException("로그인을 해주세요");
+    }
+
     Post post = new Post(requestDto, userDetailsImpl);
     postRepository.save(post);
-    return ResponseDto.success("게시글이 작성되었습니다.");
+
+    return ResponseEntity.ok(ResponseDto.success("게시글이 작성되었습니다."));
   }
 
   @Transactional
-  public ResponseDto<?> getPost(Long postId) {
-    return ResponseDto.success(postRepository.findById(postId).get());
+  public ResponseEntity<?> getPost(Long postId) {
+    return ResponseEntity.ok(ResponseDto.success(postRepository.findById(postId).get()));
   }
 
   @Transactional
-  public ResponseDto<?> getPostList() {
-    return ResponseDto.success(postRepository.findAllByOrderByCreatedAtDesc());
+  public ResponseEntity<?> getPostList() {
+    return ResponseEntity.ok(ResponseDto.success(postRepository.findAllByOrderByCreatedAtDesc()));
   }
 
   @Transactional
-  public ResponseDto<?> editPost(Long postId, PostRequestDto requestDto, UserDetailsImpl userDetailsImpl) {
+  public ResponseEntity<?> editPost(Long postId, PostRequestDto requestDto, UserDetailsImpl userDetailsImpl) {
     Post post = postRepository.findById(postId).get();
     Member member = post.getMember();
 
+    if (userDetailsImpl == null) {
+      return ResponseEntity.ok(ResponseDto.fail("BAD_REQUEST","로그인이 필요합니다."));
+    }
+
     if(authValidator.isWriter(member, userDetailsImpl.getMember())){
       post.update(requestDto);
-      return ResponseDto.success("게시글이 수정되었습니다.");
+      return ResponseEntity.ok(ResponseDto.success("게시글이 수정되었습니다."));
 
     } else throw new IllegalStateException("게시글을 수정할 권한이 없습니다.");
 
   }
 
   @Transactional
-  public ResponseDto<?> deletePost(Long postId, UserDetailsImpl userDetailsImpl) {
+  public ResponseEntity<?> deletePost(Long postId, UserDetailsImpl userDetailsImpl) {
     Post post = postRepository.findById(postId).get();
     Member member = userDetailsImpl.getMember();
 
+    if (userDetailsImpl == null) {
+      throw new IllegalArgumentException("로그인을 해주세요");
+    }
+
     if(authValidator.isWriter(member, userDetailsImpl.getMember())){
       postRepository.delete(post);
-      return ResponseDto.success("성공적으로 삭제되었습니다.");
+      return ResponseEntity.ok(ResponseDto.success("성공적으로 삭제되었습니다."));
 
     } else throw new IllegalStateException("게시글을 삭제할 권한이 없습니다.");
 

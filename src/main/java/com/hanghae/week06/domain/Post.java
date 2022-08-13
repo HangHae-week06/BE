@@ -35,7 +35,7 @@ public class Post extends Timestamped {
     private String imageUrl;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy="post")
-    private Set<Comment> commentList;
+    private Set<Comment> commentSet;
 
     @JsonIgnore
     @ManyToOne
