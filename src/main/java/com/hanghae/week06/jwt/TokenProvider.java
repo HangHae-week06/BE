@@ -12,6 +12,10 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -134,13 +138,15 @@ public class TokenProvider {
   }
 
   @Transactional
-  public ResponseDto<?> deleteRefreshToken(Member member) {
+
+  public ResponseEntity<?> deleteRefreshToken(Member member) {
     RefreshToken refreshToken = isPresentRefreshToken(member);
     if (null == refreshToken) {
-      return ResponseDto.fail("존재하지 않는 Token 입니다.");
+      return new ResponseEntity( ResponseDto.fail("TOKEN_NOT_FOUND","존재하지 않는 Token 입니다.") , HttpStatus.NOT_FOUND );
     }
 
     refreshTokenRepository.delete(refreshToken);
-    return ResponseDto.success("success");
+    return ResponseEntity.ok( ResponseDto.success("success") );
+
   }
 }

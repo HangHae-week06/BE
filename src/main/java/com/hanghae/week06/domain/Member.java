@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
+
 
 @Builder
 @Getter
@@ -21,7 +21,6 @@ public class Member extends Timestamped {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "userId", nullable = false, unique = true, length = 20)
   private Long id;
 
   @Column(nullable = false)
@@ -33,12 +32,6 @@ public class Member extends Timestamped {
 
   @Column(nullable = false)
   private String nickname;
-
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy="member")
-  private Set<Comment> commentList;
-
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy="member")
-  private Set<Post> postList;
 
 
   @Override
