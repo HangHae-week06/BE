@@ -43,9 +43,9 @@ public class Post extends Timestamped {
     private Member member;
 
 
-    public Post(PostRequestDto requestDto, UserDetailsImpl userDetailsImpl) {
+    public Post(PostRequestDto requestDto,Member member) {
         super();
-        this.member = userDetailsImpl.getMember();
+        this.member = member;
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.imageUrl = requestDto.getImgUrl();

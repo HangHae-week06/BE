@@ -35,8 +35,7 @@ public class MemberService {
 
   public ResponseEntity<?> createMember(MemberRequestDto requestDto) {
     if (null != isPresentMember(requestDto.getLoginId())) {
-      return new ResponseEntity( ResponseDto.fail("DUPLICATED_MEMBER_ID", "중복된 아이디 입니다." ) ,HttpStatus.CONFLICT );
-
+      return new ResponseEntity<>( ResponseDto.fail("DUPLICATED_MEMBER_ID", "중복된 아이디 입니다." ) ,HttpStatus.CONFLICT );
     }
 
     Member member = Member.builder()

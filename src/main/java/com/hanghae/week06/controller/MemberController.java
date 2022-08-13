@@ -30,7 +30,7 @@ public class MemberController {
 
   @PostMapping("/api/member/login")
 
-  public ResponseEntity login(@RequestBody @Valid LoginRequestDto requestDto,
+  public ResponseEntity<?> login(@RequestBody @Valid LoginRequestDto requestDto,
                               HttpServletResponse response
 
   ) {

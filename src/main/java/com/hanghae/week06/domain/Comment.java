@@ -36,4 +36,7 @@ public class Comment extends Timestamped {
     @JoinColumn(name = "post_id",updatable = false)
     private Post post;
 
+    public boolean validateMember(Member member) {
+        return !this.member.equals(member);
+    }
 }

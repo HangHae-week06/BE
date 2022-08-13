@@ -7,10 +7,12 @@ import com.hanghae.week06.domain.UserDetailsImpl;
 import com.hanghae.week06.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
@@ -23,8 +25,8 @@ public class PostController {
     // 게시글 작성
     @PostMapping("/api/post")
     public ResponseEntity<?> createPost(@RequestBody @Valid PostRequestDto requestDto,
-                                        @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
-        return postService.createPost(requestDto, userDetailsImpl);
+                                        HttpServletRequest request) {
+        return postService.createPost(requestDto, request );
     }
 
     // 게시글 조회
@@ -50,8 +52,8 @@ public class PostController {
     // 게시글 삭제
     @DeleteMapping("/api/post/{postId}")
     public ResponseEntity<?> deletePost(@PathVariable Long postId,
-                                     @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
-        return postService.deletePost(postId, userDetailsImpl);
+                                        HttpServletRequest request ) {
+        return postService.deletePost(postId, request );
     }
 
 }

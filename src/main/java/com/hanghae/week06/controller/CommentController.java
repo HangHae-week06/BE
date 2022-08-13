@@ -9,21 +9,24 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RequiredArgsConstructor
 @RestController
 public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/api/comment/{postId}") // 댓글 작성
-    public ResponseEntity<String> createComment(@PathVariable Long postId,
-                                                @AuthenticationPrincipal UserDetailsImpl userDetails,
+    public ResponseEntity<?> createComment(@PathVariable Long postId,
+                                                HttpServletRequest request,
                                                 @RequestBody CommentRequestDto commentRequestDto){
-        return commentService.createComment(postId,userDetails.getMember().getId(),commentRequestDto);
+        return commentService.createComment(postId , request ,commentRequestDto);
     }
 
     @DeleteMapping("/api/comment/{commentId}") // 댓글 삭제
-    public ResponseEntity<String> deleteComment(@PathVariable Long commentId){
-        return commentService.deleteComment(commentId);
+    public ResponseEntity<?> deleteComment(@PathVariable Long commentId,
+                                                HttpServletRequest request){
+        return commentService.deleteComment(commentId , request );
     }
 
 }
