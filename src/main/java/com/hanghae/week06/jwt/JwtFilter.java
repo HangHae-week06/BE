@@ -68,7 +68,7 @@ public class JwtFilter extends OncePerRequestFilter {
         response.getWriter().println(
             new ObjectMapper().writeValueAsString(
 
-                new ResponseEntity( ResponseDto.fail("BAD_REQUEST","로그인이 필요합니다.") , HttpStatus.BAD_REQUEST )
+                    ResponseDto.fail("BAD_REQUEST","로그인이 필요합니다.")
 
             )
         );
