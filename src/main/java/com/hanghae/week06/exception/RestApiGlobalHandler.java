@@ -11,7 +11,8 @@ public class RestApiGlobalHandler {
 
     @ExceptionHandler(value = {IllegalArgumentException.class,
             NullPointerException.class,
-            NoSuchElementException.class})
+            NoSuchElementException.class,
+            IllegalStateException.class})
 
     public ResponseEntity<Object> handleApiRequestException(Exception ex) {
         RestApiException restApiException = new RestApiException();
@@ -25,6 +26,9 @@ public class RestApiGlobalHandler {
         }
         else if(ex.getClass() == NoSuchElementException.class) {
             restApiException.setHttpStatus(HttpStatus.CONFLICT);
+        }
+        else if(ex.getClass() == IllegalStateException.class) {
+            restApiException.setHttpStatus(HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(

@@ -8,10 +8,6 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<ShowPostList> findAllByOrderByCreatedAtDesc();
-    List<Post> findAllByMember(Member member);
-    List<Post> findAllByCommentListIsNull();
-
-
     interface ShowPostList {
         Long getId();
         String getTitle();
