@@ -1,6 +1,7 @@
 package com.hanghae.week06.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hanghae.week06.controller.request.PostRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,4 +43,19 @@ public class Post extends Timestamped {
     private Member member;
 
 
+    public Post(PostRequestDto requestDto, UserDetailsImpl userDetailsImpl) {
+        super();
+        this.member = userDetailsImpl.getMember();
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.imageUrl = requestDto.getImgUrl();
+        this.author = member.getNickname();
+
+    }
+
+    public void update(PostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.imageUrl = requestDto.getImgUrl();
+    }
 }
