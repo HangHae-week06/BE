@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ResponseDto<T> {
+
   private boolean success;
   private T data;
   private Error error;
@@ -24,5 +25,6 @@ public class ResponseDto<T> {
     private String code;
     private String message;
   }
+
 
 }
