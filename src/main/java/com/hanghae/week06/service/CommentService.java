@@ -73,7 +73,7 @@ public class CommentService {
         }
 
         commentRepository.deleteById( commentId );
-        return new ResponseEntity<>("삭제 완료!",HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok( ResponseDto.success("삭제 완료!") );
     }
 
     @Transactional

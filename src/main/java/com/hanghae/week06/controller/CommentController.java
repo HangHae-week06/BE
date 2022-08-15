@@ -26,7 +26,7 @@ public class CommentController {
     @DeleteMapping("/api/comment/{commentId}") // 댓글 삭제
     public ResponseEntity<?> deleteComment(@PathVariable Long commentId,
                                                 HttpServletRequest request){
-        return commentService.deleteComment(commentId , request );
+        return commentService.deleteComment( commentId , request );
     }
 
 }

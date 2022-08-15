@@ -52,12 +52,17 @@ public class PostService {
     Post post = new Post(requestDto, member );
     postRepository.save( post );
 
-    return ResponseEntity.ok(ResponseDto.success("게시글이 작성되었습니다."));
+    return ResponseEntity.ok(ResponseDto.success(post));
   }
 
   @Transactional
   public ResponseEntity<?> getPost(Long postId) {
-    return ResponseEntity.ok(ResponseDto.success(postRepository.findById(postId).get()));
+    Post post = postRepository.findById(postId).orElse(null);
+    if( post == null ){
+      return new ResponseEntity<>(ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 입니다.")
+              , HttpStatus.NOT_FOUND );
+    }
+    return ResponseEntity.ok(ResponseDto.success(post) );
   }
 
   @Transactional
@@ -115,8 +120,6 @@ public class PostService {
       return new ResponseEntity<>(ResponseDto.fail("UNAUTHORIZED", "게시글을 삭제할 권한이 없습니다.")
               ,HttpStatus.UNAUTHORIZED );
     }
-
-
   }
 
   @Transactional(readOnly = true)
