@@ -27,6 +27,7 @@ dependencies {
     implementation 'junit:junit:4.13.1'
     implementation 'junit:junit:4.13.1'
 
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2:1.4.200'
     runtimeOnly 'mysql:mysql-connector-java'

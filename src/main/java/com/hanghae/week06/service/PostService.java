@@ -12,6 +12,7 @@ import com.hanghae.week06.domain.UserDetailsImpl;
 import com.hanghae.week06.jwt.TokenProvider;
 import com.hanghae.week06.repository.MemberRepository;
 import com.hanghae.week06.repository.PostRepository;
+import com.hanghae.week06.s3Upload.service.S3Uploader;
 import com.hanghae.week06.service.validator.AuthValidator;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -32,9 +34,10 @@ public class PostService {
   private final PostRepository postRepository;
   private final AuthValidator authValidator;
   private final TokenProvider tokenProvider;
+  private final S3Uploader s3Uploader;
 
   @Transactional
-  public ResponseEntity<?> createPost(PostRequestDto requestDto,  HttpServletRequest request) {
+  public ResponseEntity<?> createPost(PostRequestDto requestDto,  HttpServletRequest request) throws IOException {
 
 //    if (userDetailsImpl == null) {
 //      throw new IllegalArgumentException("로그인을 해주세요");
@@ -49,9 +52,12 @@ public class PostService {
       return new ResponseEntity<>( ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.")
               , HttpStatus.BAD_REQUEST );
     }
-    Post post = new Post(requestDto, member );
-    postRepository.save( post );
 
+    String result = s3Uploader.uploadFiles( requestDto.getFile() , "static");
+
+    Post post = new Post( requestDto , member , result );
+
+    postRepository.save( post );
     return ResponseEntity.ok(ResponseDto.success(post));
   }
 
@@ -89,18 +95,6 @@ public class PostService {
 
   @Transactional
   public ResponseEntity<?> deletePost(Long postId, HttpServletRequest request ) {
-//    Post post = postRepository.findById(postId).get();
-//    Member member = userDetailsImpl.getMember();
-//
-//    if (userDetailsImpl == null) {
-//      throw new IllegalArgumentException("로그인을 해주세요");
-//    }
-//
-//    if(authValidator.isWriter(member, userDetailsImpl.getMember())){
-//       postRepository.delete(post);
-////      return ResponseEntity.ok(ResponseDto.success("성공적으로 삭제되었습니다."));
-//
-//    } else throw new IllegalStateException("게시글을 삭제할 권한이 없습니다.");
 
     Member member = validateMember(request);
     if (null == member) {
@@ -114,6 +108,9 @@ public class PostService {
               , HttpStatus.NOT_FOUND );
     }
     if(authValidator.isWriter( post.getMember() , member )) {
+      String imageUrl = post.getImageUrl();
+      String deleteUrl = imageUrl.substring(imageUrl.indexOf("static"));
+      s3Uploader.deleteImage(deleteUrl);
       postRepository.delete(post);
       return ResponseEntity.ok(ResponseDto.success("성공적으로 삭제되었습니다."));
     } else {

@@ -3,14 +3,16 @@ package com.hanghae.week06.controller.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostRequestDto {
-
+  private MultipartFile file;
   private String title;
-  private String imgUrl;
   private String content;
 
 }

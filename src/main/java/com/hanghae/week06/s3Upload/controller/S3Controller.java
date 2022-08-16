@@ -16,7 +16,7 @@ public class S3Controller {
     public String updateUserImage(@RequestParam(value = "file") MultipartFile multipartFile) {
         String result = "";
         try {
-            result = s3Uploader.uploadFiles(multipartFile, "static");
+            result = s3Uploader.uploadFiles( multipartFile, "static");
         } catch (Exception e) {
             return "업로드 에러 발생";
         }

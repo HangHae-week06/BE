@@ -43,12 +43,12 @@ public class Post extends Timestamped {
     private Member member;
 
 
-    public Post(PostRequestDto requestDto,Member member) {
+    public Post(PostRequestDto requestDto,Member member , String imageUrl) {
         super();
         this.member = member;
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.imageUrl = requestDto.getImgUrl();
+        this.imageUrl = imageUrl;
         this.author = member.getNickname();
 
     }
@@ -56,6 +56,6 @@ public class Post extends Timestamped {
     public void update(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.imageUrl = requestDto.getImgUrl();
+
     }
 }

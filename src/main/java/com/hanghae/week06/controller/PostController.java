@@ -1,19 +1,18 @@
 package com.hanghae.week06.controller;
 
-import com.hanghae.week06.controller.request.MemberRequestDto;
+
 import com.hanghae.week06.controller.request.PostRequestDto;
-import com.hanghae.week06.controller.response.ResponseDto;
 import com.hanghae.week06.domain.UserDetailsImpl;
 import com.hanghae.week06.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,11 +20,11 @@ public class PostController {
 
     private final PostService postService;
 
-
     // 게시글 작성
     @PostMapping("/api/post")
-    public ResponseEntity<?> createPost(@RequestBody @Valid PostRequestDto requestDto,
-                                        HttpServletRequest request) {
+    public ResponseEntity<?> createPost(HttpServletRequest request,
+                                        @ModelAttribute PostRequestDto requestDto
+                                       ) throws IOException {
         return postService.createPost(requestDto, request );
     }
 
