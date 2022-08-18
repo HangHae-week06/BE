@@ -29,10 +29,10 @@
 ## :wrench: 기술 스택
 
 > frontend
-  *React Hook
-  *redux toolkit
-  *Axios
-  *Thunk
+  * React Hook
+  * redux toolkit
+  * Axios
+  * Thunk
 
 > backend
  * JAVA
