@@ -1,8 +1,8 @@
 # ✨ 또스타그램
 
-![image](https://user-images.githubusercontent.com/98137166/185372713-e001551d-9c1c-465d-86e8-f54b7668cff8.png)
+![image](https://user-images.githubusercontent.com/98137166/185372936-ea203b1b-40ff-430f-8f1a-5a71dafd751b.png)
 
-"또" 일상을 공유하는 SNS 사이트 입니다.
+"또"다른 일상을 공유하는 SNS 사이트 입니다.
 
 ## 👬 팀원
 > frontend
