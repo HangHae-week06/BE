@@ -67,7 +67,7 @@ https://youtu.be/umVo9IhVnzM
 #### 5. 메인 페이지에서 클릭했을 때 특정 값 id를 가져와야 하는데 아무 값도 안들어 옴 해결)dispatch를 사용하지 않았고 괄호 영역을 잘못함
 
 
-댓글, OAuth2 , 깃 액션 
+댓글, OAuth2
 
 
 
