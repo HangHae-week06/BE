@@ -25,7 +25,7 @@
 ## :fire: 트러블슈팅
 
 1. 요청 실패시 false와 에러코드를 반환하도록 설정하였지만 HTTP status 가 여전히 200 OK를 반환하는 문제 발생 ( 이동규 )
->> ResponseEntity를 사용해 에러의 상황에 따라 status 코드를 알맞게 반환하도록 설정하였음.
+* ResponseEntity를 사용해 에러의 상황에 따라 status 코드를 알맞게 반환하도록 설정하였음.
 
 
 
