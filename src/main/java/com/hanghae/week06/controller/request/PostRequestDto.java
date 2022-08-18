@@ -11,8 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostRequestDto {
-  private MultipartFile file;
-  private String title;
-  private String content;
+
+  private MultipartFile file; // 이미지 파일
+  private String title; // 게시글 제목
+  private String content;   // 게시글 본문
 
 }

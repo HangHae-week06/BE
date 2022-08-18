@@ -21,31 +21,23 @@ public class MemberController {
 
   private final MemberService memberService;
 
+//  회원가입
   @PostMapping("/api/member/signup")
-
   public ResponseEntity<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
-
     return memberService.createMember(requestDto);
   }
 
+//  로그인
   @PostMapping("/api/member/login")
-
   public ResponseEntity<?> login(@RequestBody @Valid LoginRequestDto requestDto,
                               HttpServletResponse response
-
   ) {
     return memberService.login(requestDto, response);
   }
 
-//  @RequestMapping(value = "/api/auth/member/reissue", method = RequestMethod.POST)
-//  public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-//    return memberService.reissue(request, response);
-//  }
-
-  @PostMapping("/api/auth/member/logout")
-
+// 로그아웃
+  @PostMapping("/api/member/logout")
   public ResponseEntity<?> logout(HttpServletRequest request) {
-
     return memberService.logout(request);
   }
 }

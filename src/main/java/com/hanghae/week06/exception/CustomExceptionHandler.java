@@ -12,13 +12,10 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler({MethodArgumentNotValidException.class, IllegalArgumentException.class})
     public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException exception) {
-
-
         String errorMessage = exception.getBindingResult()
                 .getAllErrors()
                 .get(0)
                 .getDefaultMessage();
-
         return new ResponseEntity( ResponseDto.fail("BAD_REQUEST",errorMessage), HttpStatus.BAD_REQUEST );
     }
 

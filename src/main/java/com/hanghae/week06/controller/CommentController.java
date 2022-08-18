@@ -17,14 +17,14 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/api/comment/{postId}") // 댓글 작성
-    public ResponseEntity<?> createComment(@PathVariable Long postId,
+    public ResponseEntity<?> createComment(@PathVariable Long postId,   // 게시글 id
                                                 HttpServletRequest request,
                                                 @RequestBody CommentRequestDto commentRequestDto){
         return commentService.createComment(postId , request ,commentRequestDto);
     }
 
     @DeleteMapping("/api/comment/{commentId}") // 댓글 삭제
-    public ResponseEntity<?> deleteComment(@PathVariable Long commentId,
+    public ResponseEntity<?> deleteComment(@PathVariable Long commentId,    // 삭제할 댓글 id
                                                 HttpServletRequest request){
         return commentService.deleteComment( commentId , request );
     }
