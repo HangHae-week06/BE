@@ -7,8 +7,16 @@
 팀원 소개
 
 ## :page_facing_up: 주요 기능
+1.
+2.
+3.
 
 ## :wrench: 기술 스택
+
+> frontend
+
+> backend
+
 
 ## :art: 페이지 구성 / 시연 영상
 
