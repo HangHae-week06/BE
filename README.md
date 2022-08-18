@@ -4,7 +4,15 @@
 
 ## :two_men_holding_hands: 팀원 
 
-팀원 소개
+> frontend
+  * 조다솜
+  * 은예찬
+
+> backend
+  * 이동규
+  * 김명수
+  * 박민정
+  * 유은정
 
 ## :page_facing_up: 주요 기능
 1.
