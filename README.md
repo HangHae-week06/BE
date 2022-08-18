@@ -2,7 +2,6 @@
 
 ![image](https://user-images.githubusercontent.com/98137166/185372713-e001551d-9c1c-465d-86e8-f54b7668cff8.png)
 
-
 "또" 일상을 공유하는 SNS 사이트 입니다.
 
 ## 👬 팀원
