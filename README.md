@@ -45,7 +45,7 @@
 
 ## :art: 페이지 구성 / 시연 영상
 
-사진, 시연영상 링크
+https://youtu.be/umVo9IhVnzM
 
 ## :fire: 트러블슈팅
 
