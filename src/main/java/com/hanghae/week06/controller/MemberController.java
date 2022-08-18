@@ -2,9 +2,11 @@ package com.hanghae.week06.controller;
 
 import com.hanghae.week06.controller.request.LoginRequestDto;
 import com.hanghae.week06.controller.request.MemberRequestDto;
-import com.hanghae.week06.controller.response.ResponseDto;
+
 import com.hanghae.week06.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,25 +21,23 @@ public class MemberController {
 
   private final MemberService memberService;
 
+//  회원가입
   @PostMapping("/api/member/signup")
-  public ResponseDto<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
+  public ResponseEntity<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
     return memberService.createMember(requestDto);
   }
 
+//  로그인
   @PostMapping("/api/member/login")
-  public ResponseDto<?> login(@RequestBody @Valid LoginRequestDto requestDto,
-      HttpServletResponse response
+  public ResponseEntity<?> login(@RequestBody @Valid LoginRequestDto requestDto,
+                              HttpServletResponse response
   ) {
     return memberService.login(requestDto, response);
   }
 
-//  @RequestMapping(value = "/api/auth/member/reissue", method = RequestMethod.POST)
-//  public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-//    return memberService.reissue(request, response);
-//  }
-
-  @PostMapping("/api/auth/member/logout")
-  public ResponseDto<?> logout(HttpServletRequest request) {
+// 로그아웃
+  @PostMapping("/api/member/logout")
+  public ResponseEntity<?> logout(HttpServletRequest request) {
     return memberService.logout(request);
   }
 }

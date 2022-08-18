@@ -13,10 +13,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class MemberRequestDto {
 
-  private String loginId;
+  private String loginId; // 회원 아이디
 
-  private String nickname;
+  private String nickname;  // 회원 닉네임
 
-  private String password;
+  private String password;  // 회원 비밀번호
 
 }

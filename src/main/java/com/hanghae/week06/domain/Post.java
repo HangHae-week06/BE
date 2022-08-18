@@ -1,6 +1,7 @@
 package com.hanghae.week06.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hanghae.week06.controller.request.PostRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +35,7 @@ public class Post extends Timestamped {
     private String imageUrl;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy="post")
-    private Set<Comment> commentList;
+    private Set<Comment> commentSet;
 
     @JsonIgnore
     @ManyToOne
@@ -42,4 +43,19 @@ public class Post extends Timestamped {
     private Member member;
 
 
+    public Post(PostRequestDto requestDto,Member member , String imageUrl) {
+        super();
+        this.member = member;
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.imageUrl = imageUrl;
+        this.author = member.getNickname();
+
+    }
+
+    public void update(PostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+
+    }
 }

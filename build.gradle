@@ -27,6 +27,7 @@ dependencies {
     implementation 'junit:junit:4.13.1'
     implementation 'junit:junit:4.13.1'
 
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2:1.4.200'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -43,6 +44,9 @@ dependencies {
 
     // Use ConfigurationProperties
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    //S3
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
 tasks.named('test') {

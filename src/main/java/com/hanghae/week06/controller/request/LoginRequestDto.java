@@ -10,9 +10,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginRequestDto {
-
-  private String loginId;
-
-  private String password;
+  private String loginId; // 로그인 아이디
+  private String password;  // 로그인 비밀번호
 
 }
