@@ -1,1 +1,1 @@
-# :sparkle: 또스타그램
+# :sparkles: 또스타그램
