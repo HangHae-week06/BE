@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/98137166/185346424-897b7e4e-459d-4e77-aa26-a68ad5c3ae2f.png)
 
 
-또 일상을 공유하는 사이트
+"또" 일상을 공유하는 SNS 사이트 입니다.
 
 ## :two_men_holding_hands: 팀원 
 
