@@ -1,6 +1,6 @@
 # ✨ 또스타그램
 
-![image](https://user-images.githubusercontent.com/98137166/185372936-ea203b1b-40ff-430f-8f1a-5a71dafd751b.png)
+![image](https://user-images.githubusercontent.com/98137166/185372986-e440f49f-3125-4c03-a372-c6cef1aaeac2.png)
 
 "또"다른 일상을 공유하는 SNS 사이트 입니다.
 
